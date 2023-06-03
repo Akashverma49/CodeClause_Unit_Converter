@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unit Converter</title>
+  <style>
+    .container {
+      margin: 20px;
+      text-align: center;
+      background-color: rosybrown;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      margin-right: 5px;
+    }
+
+    select {
+      margin-right: 5px;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Length Converter</h2>
+
+    <label>From:</label>
+    <input type="number" id="inputValue">
+    <select id="fromUnit">
+      <option value="meter">Meter</option>
+      <option value="feet">Feet</option>
+      <option value="inch">Inch</option>
+    </select>
+
+    <br>
+
+    <label>To:</label>
+    <select id="toUnit">
+      <option value="meter">Meter</option>
+      <option value="feet">Feet</option>
+      <option value="inch">Inch</option>
+    </select>
+
+    <br>
+    <br>
+    <br>
+
+    <button onclick="convert()">Convert</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convert() {
+      var inputValue = parseFloat(document.getElementById("inputValue").value);
+      var fromUnit = document.getElementById("fromUnit").value;
+      var toUnit = document.getElementById("toUnit").value;
+
+      var result;
+
+      if (fromUnit === "meter") {
+        if (toUnit === "feet") {
+          result = inputValue * 3.281;
+        } else if (toUnit === "inch") {
+          result = inputValue * 39.37;
+        } else {
+          result = inputValue;
+        }
+      } else if (fromUnit === "feet") {
+        if (toUnit === "meter") {
+          result = inputValue / 3.281;
+        } else if (toUnit === "inch") {
+          result = inputValue * 12;
+        } else {
+          result = inputValue;
+        }
+      } else if (fromUnit === "inch") {
+        if (toUnit === "meter") {
+          result = inputValue / 39.37;
+        } else if (toUnit === "feet") {
+          result = inputValue / 12;
+        } else {
+          result = inputValue;
+        }
+      }
+
+      document.getElementById("result").innerHTML = result.toFixed(2) + " " + toUnit;
+    }
+  </script>
+</body>
+</html>
